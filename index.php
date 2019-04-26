@@ -93,37 +93,37 @@ $show_complete_tasks = rand(0, 1);
                             'task_title' => 'Собеседование в IT компании',
                             'date' => '01.12.2018',
                             'projects' => $projects[2],
-                            'completed' => 1,
+                            'completed' => 0,
                         ],
                         [
                             'task_title' => 'Выполнить тестовое задание',
                             'date' => '25.12.2018',
                             'projects' => $projects[2],
-                            'completed' => 1,
+                            'completed' => 0,
                         ],
                         [
                             'task_title' => 'Сделать задание первого раздела',
                             'date' => '21.12.2018',
                             'projects' => $projects[1],
-                            'completed' => 0,
+                            'completed' => 1,
                         ],
                         [
                             'task_title' => 'Встреча с другом',
                             'date' => '22.12.2018',
                             'projects' => $projects[0],
-                            'completed' => 1,
+                            'completed' => 0,
                         ],
                         [
                             'task_title' => 'Купить корм для кота',
                             'date' => 'Нет',
                             'projects' => $projects[3],
-                            'completed' => 1,
+                            'completed' => 0,
                         ],
                         [
                             'task_title' => 'Заказать пиццу',
                             'date' => 'Нет',
                             'projects' => $projects[3],
-                            'completed' => 1,
+                            'completed' => 0,
                         ]
                     ];
                     ?>
@@ -135,28 +135,18 @@ $show_complete_tasks = rand(0, 1);
                         </td>
                     </tr>
                     <?php foreach ($proj_tasks as $key => $item): ?>
-                        <?php if ($item['completed'] === 1): ?>
-                            <tr class="tasks__item task" >
+                        <?php if (($item['completed'] === 0) || ($show_complete_tasks === 1)): ?>
+                            <tr class="tasks__item task <?php if ($item['completed'] === 1): ?>task--completed<?endif ?>">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
-                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($item['completed'] === 1): ?>checked<?endif ?>>
                                         <span class="checkbox__text"><?=$item['task_title'];?></span>
                                 <td class="task__date"><?=$item['date'];?></td>
                                 <td class="task__date"><?=$item['projects'];?></td>
                                 </label>
                                 </td>
                             </tr>
-                        <?php elseif ($show_complete_tasks === 1) : ?>
-                            <tr class="tasks__item task task--completed" >
-                            <td class="task__select">
-                                <label class="checkbox task__checkbox">
-                                    <input class="checkbox__input visually-hidden" type="checkbox" value="1" checked>
-                                    <span class="checkbox__text"><?=$item['task_title'];?></span>
-                            <td class="task__date"><?=$item['date'];?></td>
-                            <td class="task__date"><?=$item['projects'];?></td>
-                            </label>
-                            </td>
-                            </tr><?php endif ?>
+                        <?php endif ?>
                     <?php endforeach; ?>
                     </ul>
                 </table>
