@@ -1,7 +1,58 @@
 <?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
+$projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];
+
+$proj_tasks = [
+    [
+        'task_title' => 'Собеседование в IT компании',
+        'date' => '01.12.2018',
+        'project' => $projects[2],
+        'completed' => 0,
+    ],
+    [
+        'task_title' => 'Выполнить тестовое задание',
+        'date' => '25.12.2018',
+        'project' => $projects[2],
+        'completed' => 0,
+    ],
+    [
+        'task_title' => 'Сделать задание первого раздела',
+        'date' => '21.12.2018',
+        'project' => $projects[1],
+        'completed' => 1,
+    ],
+    [
+        'task_title' => 'Встреча с другом',
+        'date' => '22.12.2018',
+        'project' => $projects[0],
+        'completed' => 0,
+    ],
+    [
+        'task_title' => 'Купить корм для кота',
+        'date' => 'Нет',
+        'project' => $projects[3],
+        'completed' => 0,
+    ],
+    [
+        'task_title' => 'Заказать пиццу',
+        'date' => 'Нет',
+        'project' => $projects[3],
+        'completed' => 0,
+    ]
+];
+
+function count_project($proj_tasks, $projects) {
+    $number = 0;
+    foreach ($proj_tasks as $value) {
+        if ($value ["project"] === $projects) {
+            $number++;
+        }
+    }
+    return $number;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -42,10 +93,15 @@ $show_complete_tasks = rand(0, 1);
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#">Название проекта</a>
-                            <span class="main-navigation__list-item-count">0</span>
-                        </li>
+                        <?php $index = 0; $num = count($projects); while ($index < $num): ?>
+                            <li class="main-navigation__list-item">
+                                <a class="main-navigation__list-item-link" href="#">
+                                    <?=$projects[$index];?>
+                                </a>
+                                <span class="main-navigation__list-item-count"><?=count_project($proj_tasks, $projects[$index]); ?></span>
+                            </li>
+                            <?php $index++; ?>
+                        <?php endwhile; ?>
                     </ul>
                 </nav>
 
@@ -72,27 +128,34 @@ $show_complete_tasks = rand(0, 1);
 
                     <label class="checkbox">
                         <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
-                        <input class="checkbox__input visually-hidden show_completed" type="checkbox">
+                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if ( 1 === $show_complete_tasks ): ?>checked<?php endif; ?>>
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
 
                 <table class="tasks">
-                    <tr class="tasks__item task">
+                    <tr class="tasks__item task" >
                         <td class="task__select">
-                            <label class="checkbox task__checkbox">
-                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
-                            </label>
+                            <span>Задача</span>
+                        <td class="task__date">Дата выполнения</td>
+                        <td class="task__date">Категория</td>
                         </td>
-
-                        <td class="task__file">
-                            <a class="download-link" href="#">Home.psd</a>
-                        </td>
-
-                        <td class="task__date"></td>
                     </tr>
-                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+                    <?php foreach ($proj_tasks as $key => $item): ?>
+                        <?php if (($item['completed'] === 0) || ($show_complete_tasks === 1)): ?>
+                            <tr class="tasks__item task <?php if ($item['completed'] === 1): ?>task--completed<?endif ?>">
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($item['completed'] === 1): ?>checked<?endif ?>>
+                                        <span class="checkbox__text"><?=$item['task_title'];?></span>
+                                <td class="task__date"><?=$item['date'];?></td>
+                                <td class="task__date"><?=$item['project'];?></td>
+                                </label>
+                                </td>
+                            </tr>
+                        <?php endif ?>
+                    <?php endforeach; ?>
+                    </ul>
                 </table>
             </main>
         </div>
@@ -119,7 +182,7 @@ $show_complete_tasks = rand(0, 1);
                           d="M14.26 20.983h-2.816v-6.626H10.04v-2.28h1.404v-1.364c0-1.862.79-2.922 3.04-2.922h1.87v2.28h-1.17c-.876 0-.972.322-.972.916v1.14h2.212l-.245 2.28h-1.92v6.625z"/>
                 </svg>
             </a><span class="visually-hidden">
-        ,</span>
+	,</span>
             <a class="social__link social__link--twitter" href="#">
                 <span class="visually-hidden">Twitter</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +191,7 @@ $show_complete_tasks = rand(0, 1);
                           d="M18.38 10.572c.525-.336.913-.848 1.092-1.445-.485.305-1.02.52-1.58.635-.458-.525-1.12-.827-1.816-.83-1.388.063-2.473 1.226-2.44 2.615-.002.2.02.4.06.596-2.017-.144-3.87-1.16-5.076-2.78-.22.403-.335.856-.332 1.315-.01.865.403 1.68 1.104 2.188-.397-.016-.782-.13-1.123-.333-.03 1.207.78 2.272 1.95 2.567-.21.06-.43.09-.653.088-.155.015-.313.015-.47 0 .3 1.045 1.238 1.777 2.324 1.815-.864.724-1.956 1.12-3.083 1.122-.198.013-.397.013-.595 0 1.12.767 2.447 1.18 3.805 1.182 4.57 0 7.066-3.992 7.066-7.456v-.34c.49-.375.912-.835 1.24-1.357-.465.218-.963.36-1.473.42z"/>
                 </svg>
             </a><span class="visually-hidden">
-        ,</span>
+	,</span>
             <a class="social__link social__link--instagram" href="#">
                 <span class="visually-hidden">Instagram</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
