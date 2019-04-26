@@ -134,7 +134,7 @@ $show_complete_tasks = rand(0, 1);
                         </td>
                     </tr>
                     <?php foreach ($proj_tasks as $key => $item): ?>
-                        <?php if (($show_complete_tasks === 0) and ($item['completed'] === 1)): ?>
+                        <?php if ($item['completed'] === 1): ?>
                             <tr class="tasks__item task" >
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
@@ -145,22 +145,11 @@ $show_complete_tasks = rand(0, 1);
                                     </label>
                                 </td>
                             </tr>
-                    <?php elseif (($show_complete_tasks === 1) and ($item['completed'] === 1)) : ?>
-                    <tr class="tasks__item task" >
-                                <td class="task__select">
-                                    <label class="checkbox task__checkbox">
-                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                        <span class="checkbox__text"><?=$item['task_title'];?></span>
-                                <td class="task__date"><?=$item['date'];?></td>
-                                <td class="task__date"><?=$item['projects'];?></td>
-                                </label>
-                                </td>
-                            </tr>
-                        <?php elseif (($show_complete_tasks === 1) and ($item['completed'] === 0)) : ?>
+                    <?php elseif ($show_complete_tasks === 1) : ?>
                             <tr class="tasks__item task task--completed" >
                                 <td class="task__select">
                                  <label class="checkbox task__checkbox">
-                                    <input class="checkbox__input visually-hidden" type="checkbox" checked>
+                                    <input class="checkbox__input visually-hidden" type="checkbox" value="1">
                                     <span class="checkbox__text"><?=$item['task_title'];?></span>
                             <td class="task__date"><?=$item['date'];?></td>
                             <td class="task__date"><?=$item['projects'];?></td>
