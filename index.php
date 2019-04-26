@@ -39,6 +39,7 @@ $show_complete_tasks = rand(0, 1);
         <div class="content">
             <section class="content__side">
                 <h2 class="content__side-heading">Проекты</h2>
+
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                         <?php $projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];  ?>
@@ -128,7 +129,7 @@ $show_complete_tasks = rand(0, 1);
                     ?>
                     <tr class="tasks__item task" >
                         <td class="task__select">
-                                <span>Задача</span>
+                            <span>Задача</span>
                         <td class="task__date">Дата выполнения</td>
                         <td class="task__date">Категория</td>
                         </td>
@@ -140,22 +141,22 @@ $show_complete_tasks = rand(0, 1);
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                                         <span class="checkbox__text"><?=$item['task_title'];?></span>
-                                        <td class="task__date"><?=$item['date'];?></td>
-                                        <td class="task__date"><?=$item['projects'];?></td>
-                                    </label>
+                                <td class="task__date"><?=$item['date'];?></td>
+                                <td class="task__date"><?=$item['projects'];?></td>
+                                </label>
                                 </td>
                             </tr>
-                    <?php elseif ($show_complete_tasks === 1) : ?>
+                        <?php elseif ($show_complete_tasks === 1) : ?>
                             <tr class="tasks__item task task--completed" >
-                                <td class="task__select">
-                                 <label class="checkbox task__checkbox">
-                                    <input class="checkbox__input visually-hidden" type="checkbox" value="1">
+                            <td class="task__select">
+                                <label class="checkbox task__checkbox">
+                                    <input class="checkbox__input visually-hidden" type="checkbox" value="1" checked>
                                     <span class="checkbox__text"><?=$item['task_title'];?></span>
                             <td class="task__date"><?=$item['date'];?></td>
                             <td class="task__date"><?=$item['projects'];?></td>
-                        </label>
-                        </td>
-                    </tr><?php endif ?>
+                            </label>
+                            </td>
+                            </tr><?php endif ?>
                     <?php endforeach; ?>
                     </ul>
                 </table>
