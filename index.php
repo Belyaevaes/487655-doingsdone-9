@@ -43,19 +43,15 @@ $show_complete_tasks = rand(0, 1);
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
                         <?php $projects = ["Входящие", "Учеба", "Работа", "Домашние дела", "Авто"];  ?>
+                        <?php  $index = 0; $num = count($projects); while ($index < $num): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#">
-                                <ul>
-                                    <?php  $index = 0; $num = count($projects); while ($index < $num): ?>
-                                        <li>
-                                            <a href="#"><?=$projects[$index];?></a>
-                                        </li>
-                                        <?php $index++; ?>
-                                    <?php endwhile; ?>
-                                </ul>
+                                <?=$projects[$index];?>
                             </a>
                             <span class="main-navigation__list-item-count">0</span>
                         </li>
+                            <?php $index++; ?>
+                        <?php endwhile; ?>
                     </ul>
                 </nav>
 
