@@ -13,10 +13,15 @@ function countProjectTasks(array $proj_tasks, $project_name) {
 }
 
 function checkExpirationDate($date, $expirationHours = 24) {
-    $tsDate = strtotime($date);
-    $tsNow = time();
-    $tsDiff = $tsDate - $tsNow;
-    $hoursDiff = floor($tsDiff / SECS_IN_HOUR);
+            $tsDate = strtotime($date);
+            $tsNow = time();
+            $tsDiff = $tsDate - $tsNow;
+            if ($date !== 'Нет') {
+            $hoursDiff = floor($tsDiff / SECS_IN_HOUR);
+            }
+            else {
+            $hoursDiff = 25;
+            }
 
-    return ($hoursDiff < $expirationHours);
+    return ($hoursDiff <= $expirationHours);
 }
