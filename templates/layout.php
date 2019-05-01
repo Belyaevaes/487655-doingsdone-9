@@ -44,7 +44,7 @@
                                     <?= strip_tags($project_name)?>
                                 </a>
                                 <span class="main-navigation__list-item-count">
-                                    <?= strip_tags(countProjectTasks($tasks, $project_name))?>
+                                    <?= countProjectTasks($tasks, $project_name)?>
                                 </span>
                             </li>
                         <?php endforeach; ?>

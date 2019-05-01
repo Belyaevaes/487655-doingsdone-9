@@ -34,9 +34,9 @@
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($item['completed'] === 1): ?>checked<?endif ?>>
-                                        <span class="checkbox__text"><?= strip_tags($item['task_title']);?></span>
+                                        <span class="checkbox__text"><?= htmlspecialchars($item['task_title']);?></span>
                                 <td class="task__date"><?= strip_tags($item['date']);?></td>
-                                <td class="task__date"><?= strip_tags($item['project']);?></td>
+                                <td class="task__date"><?= htmlspecialchars($item['project']);?></td>
                                 </label>
                                 </td>
                             </tr>
