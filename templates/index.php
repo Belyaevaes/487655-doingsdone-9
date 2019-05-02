@@ -30,7 +30,7 @@
                     </tr>
                     <?php foreach ($tasks as $key =>  $item): ?>
                         <?php if (($item['completed'] === 0) || ($showCompleteTasks === 1)): ?>
-                            <tr class="tasks__item task <?php if ($item['completed'] === 1): ?>task--completed<?endif ?>">
+                            <tr class="tasks__item task <?php if ($item['completed'] === 1): ?>task--completed<?endif; ?> <?php  if (checkExpirationDate($item['date']) === true): ?>task--important<?php endif; ?>">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($item['completed'] === 1): ?>checked<?endif ?>>
@@ -40,7 +40,7 @@
                                 </label>
                                 </td>
                             </tr>
-                        <?php endif ?>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                     </ul>
                 </table>
