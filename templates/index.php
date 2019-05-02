@@ -30,12 +30,12 @@
                     </tr>
                     <?php foreach ($tasks as $key =>  $item): ?>
                         <?php if (($item['completed'] === 0) || ($showCompleteTasks === 1)): ?>
-                            <tr class="tasks__item task <?php if ($item['completed'] === 1): ?>task--completed<?endif; ?> <?php  if (checkExpirationDate($item['date']) === true): ?>task--important<?php endif; ?>">
+                            <tr class="tasks__item task <?php if ($item['completed'] === 1): ?>task--completed<?endif; ?> <?= checkExpirationDate($item['date']) === true ? 'task--important' : '' ; ?>">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1" <?php if ($item['completed'] === 1): ?>checked<?endif ?>>
                                         <span class="checkbox__text"><?= htmlspecialchars($item['task_title']);?></span>
-                                <td class="task__date"><?= strip_tags($item['date']);?></td>
+                                <td class="task__date"><?= $item['date'] === NULL ? 'Нет' : $item['date'];?></td>
                                 <td class="task__date"><?= htmlspecialchars($item['project']);?></td>
                                 </label>
                                 </td>

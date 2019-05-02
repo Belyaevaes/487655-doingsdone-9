@@ -30,13 +30,13 @@ $proj_tasks = [
     ],
     [
         'task_title' => 'Купить корм для кота',
-        'date' => 'Нет',
+        'date' => NULL,
         'project' => 'Домашние дела',
         'completed' => 0,
     ],
     [
         'task_title' => 'Заказать пиццу',
-        'date' => 'Нет',
+        'date' => NULL,
         'project' => 'Домашние дела',
         'completed' => 0,
     ]
