@@ -19,7 +19,7 @@ create table tasks (
   file char(128),
   deadline date default null,
   project_id int not null,
-  user_id int not null,
+  user_id int not null
 );
 
 create table users (
@@ -29,3 +29,6 @@ create table users (
   password char(64) not null,
   dt_add datetime not null default now()
 );
+
+create unique index proj_name on projects (user_id,name);
+create index tasks on tasks (user_id,project_id);

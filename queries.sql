@@ -15,25 +15,25 @@ values ('Входящие', 2),
 insert into tasks set name = 'Собеседование в IT компании',
                       project_id = 3,
                       user_id = 1,
-                      deadline = 2019-05-01,
+                      deadline = '2019-05-01',
                       completed = 0;
 
 insert into tasks set name = 'Выполнить тестовое задание',
                       project_id = 3,
                       user_id = 1,
-                      deadline = 2019-12-15,
+                      deadline = '2019-12-15',
                       completed = 0;
 
 insert into tasks set name = 'Сделать задание первого раздела',
                       project_id = 2,
                       user_id = 1,
-                      deadline = 2018-12-15,
+                      deadline = '2018-12-15',
                       completed = 1;
 
 insert into tasks set name = 'Встреча с другом',
                       project_id = 1,
                       user_id = 2,
-                      deadline = 2018-12-22,
+                      deadline = '2018-12-22',
                       completed = 0;
 
 insert into tasks set name = 'Купить корм для кота',
@@ -49,7 +49,7 @@ insert into tasks set name = 'Заказать пиццу',
                       completed = 0;
 
 # получить список из всех проектов для одного пользователя
-select id, project_id, user_id FROM tasks WHERE user_id = 1;
+select id, project_id, user_id, p.name FROM tasks WHERE user_id = 1;
 
 # объединить проекты с задачами (посчитать количество задач в каждом проекте)
 select p.id, p.name, count(t.id) as tasks_count from projects p
