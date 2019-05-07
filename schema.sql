@@ -13,13 +13,13 @@ create table projects (
 
 create table tasks (
   id int auto_increment primary key,
-  status int default 0,
   name char(128) not null,
+  dt_create datetime not null default now(),
+  completed int default 0,
   file char(128),
-  deadline datetime,
+  deadline date default null,
   project_id int not null,
-  user_id int not null,
-  dt_create datetime not null default now()
+  user_id int not null
 );
 
 create table users (
@@ -29,3 +29,6 @@ create table users (
   password char(64) not null,
   dt_add datetime not null default now()
 );
+
+create unique index proj_name on projects (user_id,name);
+create index tasks on tasks (user_id,project_id);
